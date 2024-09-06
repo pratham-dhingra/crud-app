@@ -4,6 +4,7 @@ import { backendUri } from "./constants";
 import { UserData } from "./types";
 import { CircularProgress } from "@mui/material";
 import UserCard from "./UserCard";
+import SkeletonCard from "./SkeletonCard";
 
 function App() {
   const [users, setUserData] = useState<UserData[]>([]);
@@ -34,9 +35,14 @@ function App() {
             {loading ? <CircularProgress color="secondary" /> : <div />}
           </div>
           <div className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
-            {users.map((user) => {
-              return <UserCard key={user.id} loading={loading} user={user} />;
-            })}
+            {loading &&
+              [...new Array(10)].map((_, index) => {
+                return <SkeletonCard key={index} />;
+              })}
+            {!loading &&
+              users.map((user) => {
+                return <UserCard key={user.id} user={user} />;
+              })}
           </div>
         </section>
       </main>
