@@ -9,11 +9,10 @@ import {
 const SkeletonCard = () => {
   return (
     <>
-      <Card variant="outlined" className="h-[230px] w-full">
+      <Card variant="outlined" className="h-[250px] w-full">
         <CardContent>
-          <div className="flex gap-2">
-            <Skeleton variant="rectangular" className="mb-2 h-4 w-full" />
-          </div>
+          <Skeleton variant="rectangular" className="mb-2 h-4 w-full" />
+          <Skeleton variant="rectangular" className="mb-2 h-4 w-full" />
           <Typography variant="h5" component="div">
             <Skeleton variant="rectangular" className="mb-2 h-6 w-full" />
           </Typography>

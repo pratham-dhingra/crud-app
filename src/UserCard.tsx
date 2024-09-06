@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 import { UserData } from "./types";
 import { useState } from "react";
 import SkeletonCard from "./SkeletonCard";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { backendUri } from "./constants";
 
 type Props = {
   user: UserData;
+  showMessage: (msg: string) => void;
 };
 
 const UserCard = (props: Props) => {
@@ -22,8 +23,18 @@ const UserCard = (props: Props) => {
 
   const deleteItem = async () => {
     setLoading(true);
-    await axios.delete(`${backendUri}/users/${props.user.id}`);
-    setLoading(false);
+    try {
+      await axios.delete(`${backendUri}/users/${props.user.id}`);
+      props.showMessage(`User with id ${props.user.id} deleted.`);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        props.showMessage(error.message);
+      } else {
+        props.showMessage("There was an error while deleting");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -32,18 +43,22 @@ const UserCard = (props: Props) => {
 
   return (
     <>
-      <Card variant="outlined" className="h-[230px] w-full">
+      <Card variant="outlined" className="h-[250px] w-full">
         <CardContent>
-          <div className="flex gap-2">
-            <Typography
-              gutterBottom
-              sx={{ color: "text.secondary", fontSize: 14 }}
-            >
-              {props.user.company.name}
-              {", "}
-              {props.user.company.catchPhrase}
-            </Typography>
-          </div>
+          <Typography
+            // gutterBottom
+            sx={{ color: "text.secondary", fontSize: 14 }}
+          >
+            ID: {props.user.id}
+          </Typography>
+          <Typography
+            gutterBottom
+            sx={{ color: "text.secondary", fontSize: 14 }}
+          >
+            {props.user.company.name}
+            {", "}
+            {props.user.company.catchPhrase}
+          </Typography>
           <Typography variant="h5" component="div">
             {props.user.name}
           </Typography>

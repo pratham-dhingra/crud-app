@@ -2,19 +2,38 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { backendUri } from "./constants";
 import { UserData } from "./types";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Snackbar, SnackbarCloseReason } from "@mui/material";
 import UserCard from "./UserCard";
 import SkeletonCard from "./SkeletonCard";
 
 function App() {
   const [users, setUserData] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+
+  const handleClose = (
+    _: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const showMessage = (text: string) => {
+    setOpen(true);
+    setMsg(text);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(`${backendUri}/users`);
       setUserData(resp.data);
       setLoading(false);
+      showMessage("Users data loaded!");
     };
 
     fetchData();
@@ -41,11 +60,24 @@ function App() {
               })}
             {!loading &&
               users.map((user) => {
-                return <UserCard key={user.id} user={user} />;
+                return (
+                  <UserCard
+                    showMessage={showMessage}
+                    key={user.id}
+                    user={user}
+                  />
+                );
               })}
           </div>
         </section>
       </main>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={msg}
+      />
     </>
   );
 }
