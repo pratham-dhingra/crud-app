@@ -5,6 +5,8 @@ import {
   Email,
   Language,
   LocationOn,
+  PanoramaFishEye,
+  Visibility,
 } from "@mui/icons-material";
 import {
   Card,
@@ -111,6 +113,11 @@ const UserCard = (props: Props) => {
             </Link>
           </div>
           <div>
+            <Link to={`/view/${props.user.id}`}>
+              <IconButton aria-label="Location">
+                <Visibility fontSize="medium" color="primary" />
+              </IconButton>
+            </Link>
             <Link to={`/edit/${props.user.id}`}>
               <IconButton aria-label="Location">
                 <Edit fontSize="medium" color="secondary" />

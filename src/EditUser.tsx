@@ -26,7 +26,7 @@ const EditUser = () => {
         if (error instanceof AxiosError) {
           showMessage(error.message);
         } else {
-          showMessage("There was an error while creating the user.");
+          showMessage("There was an error while fetching the user.");
         }
         navigate("/");
       } finally {
