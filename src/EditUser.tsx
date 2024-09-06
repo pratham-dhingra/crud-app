@@ -61,7 +61,7 @@ const EditUser = () => {
 
     setLoading(true);
     try {
-      const resp = await axios.patch(`${backendUri}/users/${id}`);
+      const resp = await axios.put(`${backendUri}/users/${id}`);
       console.log(resp.data);
       showMessage(`User with id ${resp.data.id} updated.`);
       setTimeout(() => {
