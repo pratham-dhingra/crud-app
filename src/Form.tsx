@@ -107,7 +107,7 @@ export const Form = ({
           className="mt-2 w-full"
           variant="contained"
           type="submit"
-          color="primary"
+          color="secondary"
           disabled={loading || objectLength(formik.errors) !== 0}
         >
           {buttonText}

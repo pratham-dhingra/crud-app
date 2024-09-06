@@ -1,7 +1,8 @@
+import CreateUser from "./CreateUser";
 import UsersPage from "./UsersPage";
 
 const App = () => {
-  return <UsersPage />;
+  return <CreateUser />;
 };
 
 export default App;
