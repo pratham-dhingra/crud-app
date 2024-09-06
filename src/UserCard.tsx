@@ -17,7 +17,7 @@ type Props = {
 const UserCard = (props: Props) => {
   return (
     <>
-      <Card variant="outlined" className="max-w-96">
+      <Card variant="outlined" className="h-[230px] w-full">
         <CardContent>
           <div className="flex gap-2">
             <Typography

@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(`${backendUri}/users`);
-      setUserData([resp.data[0]]);
+      setUserData(resp.data);
       setLoading(false);
     };
 
@@ -25,26 +25,28 @@ function App() {
 
   return (
     <>
-      <main className="h-screen w-screen bg-slate-900 flex flex-col">
+      <main className="flex h-screen w-screen flex-col overflow-y-scroll bg-slate-900">
         {loading && (
           <>
-            <section className="w-full h-full flex flex-col p-6">
-              <div className="flex gap-2 justify-between">
-                <h1 className="text-white text-4xl font-bold">Loading </h1>
+            <section className="flex h-full w-full flex-col p-6">
+              <div className="flex justify-between gap-2">
+                <h1 className="text-4xl font-bold text-white">Loading </h1>
                 <CircularProgress color="secondary" />
               </div>
             </section>
           </>
         )}
         {!loading && (
-          <section className="w-full h-full flex flex-col p-6">
-            <div className="flex gap-2 justify-between">
-              <h1 className="text-white text-4xl font-bold">Users</h1>
+          <section className="flex h-full w-full flex-col p-6">
+            <div className="flex justify-between gap-2">
+              <h1 className="text-4xl font-bold text-white">Users</h1>
               <div />
             </div>
-            {users.map((user) => {
-              return <UserCard key={user.id} loading={loading} user={user} />;
-            })}
+            <div className="grid w-full grid-cols-1 gap-4 bg-black md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {users.map((user) => {
+                return <UserCard key={user.id} loading={loading} user={user} />;
+              })}
+            </div>
           </section>
         )}
       </main>
