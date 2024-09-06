@@ -2,9 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { backendUri } from "./constants";
 import { UserData } from "./types";
-import { CircularProgress, Snackbar, SnackbarCloseReason } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Snackbar,
+  SnackbarCloseReason,
+} from "@mui/material";
 import UserCard from "./UserCard";
 import SkeletonCard from "./SkeletonCard";
+import { Add } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 function UsersPage() {
   const [users, setUserData] = useState<UserData[]>([]);
@@ -33,7 +40,7 @@ function UsersPage() {
       const resp = await axios.get(`${backendUri}/users`);
       setUserData(resp.data);
       setLoading(false);
-      showMessage("Users data loaded!");
+      // showMessage("Users data loaded!");
     };
 
     fetchData();
@@ -51,7 +58,19 @@ function UsersPage() {
             <h1 className="text-4xl font-bold text-white">
               {loading ? "Loading" : "Users"}
             </h1>
-            {loading ? <CircularProgress color="secondary" /> : <div />}
+            {loading ? (
+              <CircularProgress color="secondary" />
+            ) : (
+              <Link to={"/create"}>
+                <Button
+                  startIcon={<Add />}
+                  variant="contained"
+                  color="secondary"
+                >
+                  New User
+                </Button>
+              </Link>
+            )}
           </div>
           <div className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
             {loading &&

@@ -40,7 +40,7 @@ const CreateUser = () => {
       console.log(resp.data);
       showMessage(`User with id ${resp.data.id} created.`);
       setTimeout(() => {
-        navigate("/users");
+        navigate("/");
       }, 2000);
     } catch (error) {
       if (error instanceof AxiosError) {
