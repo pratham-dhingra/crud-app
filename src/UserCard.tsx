@@ -5,7 +5,6 @@ import {
   Email,
   Language,
   LocationOn,
-  PanoramaFishEye,
   Visibility,
 } from "@mui/icons-material";
 import {
@@ -15,13 +14,12 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { UserData } from "./types";
-import { useState } from "react";
-import SkeletonCard from "./SkeletonCard";
 import axios, { AxiosError } from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { backendUri } from "./constants";
-
+import SkeletonCard from "./SkeletonCard";
+import { UserData } from "./types";
 type Props = {
   user: UserData;
   showMessage: (msg: string) => void;
