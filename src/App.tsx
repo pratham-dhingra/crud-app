@@ -42,7 +42,7 @@ function App() {
               <h1 className="text-4xl font-bold text-white">Users</h1>
               <div />
             </div>
-            <div className="grid w-full grid-cols-1 gap-4 bg-black md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
               {users.map((user) => {
                 return <UserCard key={user.id} loading={loading} user={user} />;
               })}
