@@ -1,4 +1,11 @@
-import { Call, Delete, Email, Language, LocationOn } from "@mui/icons-material";
+import {
+  Call,
+  Delete,
+  Edit,
+  Email,
+  Language,
+  LocationOn,
+} from "@mui/icons-material";
 import {
   Card,
   CardActions,
@@ -43,7 +50,7 @@ const UserCard = (props: Props) => {
 
   return (
     <>
-      <Card variant="outlined" className="h-[250px] w-full">
+      <Card variant="outlined" className="h-[260px] w-full">
         <CardContent>
           <Typography
             // gutterBottom
@@ -56,7 +63,7 @@ const UserCard = (props: Props) => {
             sx={{ color: "text.secondary", fontSize: 14 }}
           >
             {props.user.company.name}
-            {", "}
+            <br />
             {props.user.company.catchPhrase}
           </Typography>
           <Typography variant="h5" component="div">
@@ -103,9 +110,16 @@ const UserCard = (props: Props) => {
               </IconButton>
             </Link>
           </div>
-          <IconButton onClick={deleteItem} aria-label="Location">
-            <Delete fontSize="large" color="error" />
-          </IconButton>
+          <div>
+            <Link to={`/edit/${props.user.id}`}>
+              <IconButton aria-label="Location">
+                <Edit fontSize="medium" color="secondary" />
+              </IconButton>
+            </Link>
+            <IconButton onClick={deleteItem} aria-label="Location">
+              <Delete fontSize="medium" color="error" />
+            </IconButton>
+          </div>
         </CardActions>
       </Card>
     </>
